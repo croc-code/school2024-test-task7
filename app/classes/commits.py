@@ -1,8 +1,9 @@
 from typing import List, Dict, Union
 import re
 from datetime import datetime as dt
+import logging
 
-commit_regex = re.compile(r"[a-f0-9]{7}")
+commit_regex = re.compile(r"[a-z0-9]{7}")
 date_mask = "%Y-%m-%dT%H:%M:%S"
 
 
@@ -19,9 +20,12 @@ class Commit:
 
     @staticmethod
     def _check_hash(c_hash: str) -> bool:
-        return bool(re.match(commit_regex, c_hash))
+        return bool(re.fullmatch(commit_regex, c_hash))
 
     def __new__(cls, *args, c_hash: str = None, dt_str: str = None, **kwargs):
+        if c_hash is None and dt_str is None and len(args) == 2:
+            c_hash = args[0]
+            dt_str = args[1]
         if c_hash is None:
             raise ValueError("Commit hash is required")
         if dt_str is None:
