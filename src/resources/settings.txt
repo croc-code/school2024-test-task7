@@ -1,0 +1,2 @@
+inputPath = src/resources/commits.txt
+outputPath = src/resources/result.txt
