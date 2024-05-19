@@ -47,5 +47,5 @@ CodeKiller777
 2) Либо входной файл размещаем рядом с исходными файлами в папке school2024-test-task7\Top_3_croc, либо указываем путь до файла в файле appsettings.json в поле "DefaultConnection".
 3) Переходим в папку с решением: cd school2024-test-task7
 4) Собираем решение: dotnet build
-5) Переходим в папку с исходными файлами: cd school2024-test-task7
+5) Переходим в папку с исходными файлами: cd Top_3_croc
 6) Запускаем: dotnet run
