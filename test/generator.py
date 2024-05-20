@@ -22,6 +22,6 @@ def generate() -> str:
 
 
 if __name__ == "__main__":
-    with open(f"input.txt", "w") as f:
+    with open(f"commits.txt", "w") as f:
         for i in range(10000):
                 f.write(generate())
