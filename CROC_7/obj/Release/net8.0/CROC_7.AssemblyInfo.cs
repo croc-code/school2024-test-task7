@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CROC_7")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+08371a486513a48e4d05b40d567ae9acf0253759")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+281df28d7b5b641b441b5bf71f0fe5e351f5a9e2")]
 [assembly: System.Reflection.AssemblyProductAttribute("CROC_7")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CROC_7")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

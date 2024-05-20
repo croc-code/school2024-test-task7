@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace CROC_7
 {
-    public static class CommitsRating
+    public static class RatingContributors
     {
+        /// <summary>
+        /// Returns top of rating, default - returns top-3
+        /// </summary>
         public static List<string> GetTop(IEnumerable<string> rating, int count = 3)
         {
             return rating.Take(count).ToList();
@@ -20,14 +23,14 @@ namespace CROC_7
             return commits
                 .Distinct()
                 .Select(commit => commit.Split())
-                .Where(IsValidCommit)
+                .Where(IsCommit)
                 .Select(commit => commit[0])
                 .GroupBy(commit => commit)
                 .OrderByDescending(commit => commit.Count())
                 .Select(commit => commit.Key);
         }
 
-        public static bool IsValidCommit(string[] commit)
+        public static bool IsCommit(string[] commit)
         {
             return commit != null
                 && commit.Length == 3

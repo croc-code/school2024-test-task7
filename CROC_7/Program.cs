@@ -14,8 +14,8 @@ internal class Program
     public static void DoTask(string inputFile, string outputFile)
     {
         var input = FileWorker.ReadFile(inputFile);
-        var rating = CommitsRating.GetRating(input);
-        var top = CommitsRating.GetTop(rating);
+        var rating = RatingContributors.GetRating(input);
+        var top = RatingContributors.GetTop(rating);
         FileWorker.SaveFile(outputFile, top);
     }
 }
