@@ -4,7 +4,13 @@ from datetime import datetime as dt
 from datetime import timedelta
 
 # line mask is: "{username} {short_hash} {time}"
+# used to test workability
 def generate() -> str:
+    """
+    Generates a random string
+    :return: str of random string with mask line format of username, short hash, time
+    :rtype: str
+    """
     username = random.choice(string.ascii_letters) + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(2))
 
     short_hash = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(7))
