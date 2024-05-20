@@ -81,6 +81,9 @@ CodeKiller777
 
 Запуск процедуры осуществляется после клонирования репозитория. Установка дополнительных библиотек не требуется.
 ```console
-$ git clone https://github.com/nikusick/school2024-test-task7.git
-$ python main.py
+git clone https://github.com/nikusick/school2024-test-task7.git
+cd school2024-test-task7
+python main.py
 ```
+| :exclamation:  Не забудьте добавить файл commits.txt в папку с main.py!   |
+|-----------------------------------------|
