@@ -7,6 +7,13 @@ import java.util.Map;
 
 public class ReportService {
 
+    /**
+     * Возвращает список из трех самых активных участников по количеству коммитов,
+     * расположенных по их убыванию.
+     *
+     * @param commits список строк коммитов.
+     * @return список имен пользователей, которые сделали наибольшее количество коммитов.
+     */
     public static List<String> getTopThreeContributors(List<String> commits) {
 
         Map<String, Integer> commitsAmountByUsername = getContributorsMap(commits);
@@ -19,6 +26,12 @@ public class ReportService {
                 .toList();
     }
 
+    /**
+     * Алгоритм для формирования данных: [имя пользователя - количество коммитов в спринте].
+     *
+     * @param commits список строк коммитов.
+     * @return Map с именами пользователей и количеством их коммитов.
+     */
     private static Map<String, Integer> getContributorsMap(List<String> commits) {
 
         Map<String, Integer> contributorsMap = new HashMap<>();
