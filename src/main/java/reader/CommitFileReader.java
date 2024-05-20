@@ -56,7 +56,6 @@ public class CommitFileReader {
     private static void printValidationError(String commitLine) {
 
         System.out.println("Commit: [" + commitLine + "] doesn't valid. Check format or data correctness.");
-//        LOGGER.info("Commit: [" + commitLine + "] doesn't valid. Check format\n");
     }
 
 }
