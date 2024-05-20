@@ -1,10 +1,9 @@
-﻿
-namespace CROC_7;
+﻿namespace CROC_7;
 internal class Program
 {
     public static void Main()
     {
-        DoTask();
+        DoTask("commits.txt", "result.txt");
         Console.WriteLine(
             "Файл с результатом находится в папке проекта :\n" +
             $"{FileWorker.projectPath}\n\n" +
@@ -12,11 +11,11 @@ internal class Program
         Console.ReadKey();
     }
 
-    public static void DoTask()
+    public static void DoTask(string inputFile, string outputFile)
     {
-        var input = FileWorker.ReadFile("commits.txt");
-        var rating = CommitsRating.ParseFile(input);
+        var input = FileWorker.ReadFile(inputFile);
+        var rating = CommitsRating.GetRating(input);
         var top = CommitsRating.GetTop(rating);
-        FileWorker.SaveFile("result.txt", top);
+        FileWorker.SaveFile(outputFile, top);
     }
 }

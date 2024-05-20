@@ -15,7 +15,7 @@ namespace CROC_7
             return rating.Take(count).ToList();
         }
 
-        public static IEnumerable<string> ParseFile(IEnumerable<string> commits)
+        public static IEnumerable<string> GetRating(IEnumerable<string> commits)
         {
             return commits
                 .Distinct()
@@ -29,7 +29,8 @@ namespace CROC_7
 
         public static bool IsValidCommit(string[] commit)
         {
-            return commit.Length == 3
+            return commit != null
+                && commit.Length == 3
                 && IsName(commit[0])
                 && IsShortHash(commit[1])
                 && IsDateTime(commit[2]);
@@ -62,7 +63,6 @@ namespace CROC_7
                 if(isFirst)
                 {
                     isFirst = false;
-
                     if (!char.IsLetter(symbol) && symbol != '_')
                         return false;
                 }
@@ -75,5 +75,4 @@ namespace CROC_7
             return true;
         }
     }
-
 }

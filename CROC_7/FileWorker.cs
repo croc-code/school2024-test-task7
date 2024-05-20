@@ -12,10 +12,10 @@ namespace CROC_7
 
         static FileWorker()
         {
-                projectPath = Directory
-                .GetParent(Directory.GetCurrentDirectory())
+                projectPath = Directory.GetParent(Directory.GetCurrentDirectory())
                 .Parent.Parent.FullName;
         }
+
         public static IEnumerable<string> ReadFile(string fileName)
         {
             var path = Path.Combine(projectPath, fileName);
