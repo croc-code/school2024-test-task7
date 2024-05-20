@@ -5,7 +5,12 @@ from collections import defaultdict
 
 class Analyser:
 
-    def generate_report(self, input_file_name, output_file_name):
+    def generate_report(self, input_file_name: str, output_file_name: str) -> None:
+        """
+        Generate a report from the input file.
+        :param input_file_name: Name of the input file.
+        :param output_file_name: Name of the output file.
+        """
         try:
             contributors = defaultdict(int)
             file_parser = FileManager()
