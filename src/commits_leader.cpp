@@ -1,69 +1,56 @@
 #include <commits_leader.h>
 
-using namespace std;
+template <typename ContainerType> void printContainer(ContainerType container) {
+  cout << "\n----------------" << endl;
+  auto it = container.begin();
+  while (it != container.end()) {
+    cout << it->first << " " << it->second << endl;
+    it++;
+  }
+  cout << "\n----------------" << endl;
+}
+
 // если файл пустой, если меньше 3 человек
-void readCommitsNumberFromFile(map<string, int> &commitsNumber, char *filename)
-{
-    ifstream srcFile(filename);
-    string line, word, delimiter = " ";
+void readCommitsNumberFromFile(map<string, int> &commitsNumber,
+                               char *filename) {
+  ifstream srcFile(filename);
+  string line, word, delimiter = " ";
 
-    while (getline(srcFile, line))
-    {
-        word = line.substr(0, line.find(delimiter));
-        auto it = commitsNumber.find(word);
-        cout << word << endl;
+  while (getline(srcFile, line)) {
+    word = line.substr(0, line.find(delimiter));
+    auto it = commitsNumber.find(word);
+    cout << word << endl;
 
-        if (it != commitsNumber.end())
-        {
-            commitsNumber[word]++;
-        }
-        else
-            commitsNumber[word] = 0;
-    }
-    srcFile.close();
+    if (it != commitsNumber.end()) {
+      commitsNumber[word]++;
+    } else
+      commitsNumber[word] = 1;
+  }
+  srcFile.close();
 }
 
-void writeLeaderBoard(multimap<int, string> contributorsRaiting, char *filename)
-{
-    ofstream outputFile(filename);
-    auto iter = contributorsRaiting.end();
+void writeLeaderBoard(multimap<int, string, greater<int>> contributorsRaiting,
+                      char *filename) {
+  ofstream outputFile(filename);
+  auto iter = contributorsRaiting.begin();
 
-    for (int i = 0; i < 3; i++)
-    {
-        if (iter == contributorsRaiting.begin())
-            break;
-        iter--;
-        outputFile << iter->second << '\n';
-    }
-    outputFile.close();
+  for (int i = 0; i < 3 && iter !=contributorsRaiting.end(); i++) {
+    outputFile << iter->second << '\n';
+    iter++;
+  }
+  outputFile.close();
 }
 
-int main(int argc, char **argv)
-{
+void getLeaders(char *inputFilename, char *outputFilename) {
 
-    map<string, int> commitsNumber;
-    multimap<int, string> contributorsRaiting;
+  map<string, int> commitsNumber;
+  multimap<int, string, greater<int>> contributorsRaiting;
 
-    readCommitsNumberFromFile(commitsNumber, argv[1]);
-
-    auto it = commitsNumber.begin();
-    while (it != commitsNumber.end())
-    {
-        cout << it->first << " ";
-        it++;
-    }
-
-    for (auto &[key, value] : commitsNumber)
-    {
-        contributorsRaiting.insert({value, key});
-    }
-
-    cout << "\n----------------" << endl;
-    auto it2 = contributorsRaiting.begin();
-    while (it2 != contributorsRaiting.end())
-    {
-        cout << it2->first << " ";
-        it2++;
-    }
-    writeLeaderBoard(contributorsRaiting, argv[2]);
+  readCommitsNumberFromFile(commitsNumber, inputFilename);
+  printContainer(commitsNumber);
+  for (auto &[key, value] : commitsNumber) {
+    contributorsRaiting.insert({value, key});
+  }
+  printContainer(contributorsRaiting);
+  writeLeaderBoard(contributorsRaiting, outputFilename);
 }
