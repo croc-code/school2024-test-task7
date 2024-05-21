@@ -17,8 +17,8 @@ namespace ConfigHandler {
 	class ConfigHandler {
 	private:
 		std::string configFilePath{DEFAULT_CONFIG_PATH};
-		std::string commitsFilePath;
-		std::string outputFilePath;
+		std::string commitsFilePath{};
+		std::string outputFilePath{};
 	public:
 		explicit ConfigHandler(std::string filePath=DEFAULT_CONFIG_PATH);
 

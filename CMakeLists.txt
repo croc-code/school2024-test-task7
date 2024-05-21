@@ -12,10 +12,14 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(${PROJECT_NAME}_HEADERS
         src/ConfigHandler.hpp
+        src/Commit.hpp
+        src/CommitParser.hpp
 )
 
 set(${PROJECT_NAME}_SOURCES
         src/ConfigHandler.cpp
+        src/Commit.cpp
+        src/CommitParser.cpp
         src/main.cpp
 )
 

@@ -7,21 +7,21 @@
 //#include <utility>
 
 ConfigHandler::ConfigHandler::ConfigHandler(std::string _configFilePath):
-	configFilePath(std::move(_configFilePath)) {
+	configFilePath(std::move(_configFilePath))
+	{
+		std::ifstream configFile{configFilePath};
+		if (!configFile.is_open()) {
+			throw std::runtime_error("Error opening a file by path: " + configFilePath);
+		}
 
-	std::ifstream configFile{configFilePath};
-	if (!configFile.is_open()) {
-		throw std::runtime_error("Error opening a file by path: " + configFilePath);
+		nlohmann::json j{};
+		configFile >> j;
+
+		commitsFilePath = j["commitsFilePath"].get<std::string>();
+		outputFilePath = j["outputFilePath"].get<std::string>();
+
+		configFile.close();
 	}
-
-	nlohmann::json j{};
-	configFile >> j;
-
-	commitsFilePath = j["commitsFilePath"].get<std::string>();
-	outputFilePath = j["outputFilePath"].get<std::string>();
-
-	configFile.close();
-}
 
 std::string ConfigHandler::ConfigHandler::getCommitsFilePath() const {
 	return commitsFilePath;
