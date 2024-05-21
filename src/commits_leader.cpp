@@ -15,36 +15,66 @@ bool checkNickname(string nickname) {
     return false;
   for (auto iter = nickname.begin(); iter != nickname.end(); iter++) {
     if (!(('0' <= *iter && *iter <= '9') || ('a' <= *iter && *iter <= 'z') ||
-         ('A' <= *iter && *iter <= 'Z') || *iter == '_'))
-         {
-            cout << "letter " << *iter << endl;
+          ('A' <= *iter && *iter <= 'Z') || *iter == '_')) {
       return false;
-         }
+    }
   }
   return true;
 }
-/*
-- имя пользователя может содержать латинские символы в любом регистре, цифры (но
-не начинаться с них), а также символ "_";
-- сокращенный хэш коммита представляет из себя строку в нижнем регистре,
-состояющую из 7 символов: букв латинского алфавита, а также цифр;
-- дата и время коммита в формате YYYY-MM-ddTHH:mm:ss.
-*/
-// добавить проверку элементов в строке
+
+bool checkHash(string hash) {
+  if (hash.length() != 7)
+    return false;
+  for (auto iter = hash.begin(); iter != hash.end(); iter++) {
+    if (!(('0' <= *iter && *iter <= '9') || ('a' <= *iter && *iter <= 'z'))) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool checkTime(string time) {
+  (void)time;
+  std::regex timestamp_regex(R"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3})");
+
+  return std::regex_match(time, timestamp_regex);
+}
+
+bool checkDataCorrectness(string line, map<string, int> commitsNumber,
+                          string &nickname, map<string, int>::iterator &it) {
+  string hash, time, delimiter = " ";
+  nickname = line.substr(0, line.find(delimiter));
+  it = commitsNumber.find(nickname);
+  if (!checkNickname(nickname)) {
+    cout << "Некорректный никнейм " << nickname << endl;
+    return false;
+  }
+
+  line.erase(0, line.find(delimiter) + 1);
+  hash = line.substr(0, line.find(delimiter));
+  if (!checkHash(hash)) {
+    cout << "Некорректный хэш коммита " << hash << endl;
+    return false;
+  }
+
+  line.erase(0, line.find(delimiter) + 1);
+  time = line.substr(0, line.find(delimiter));
+  if (!checkTime(time)) {
+    cout << "Некорректное время коммита " << time << endl;
+    return false;
+  }
+  return true;
+}
+
 bool readCommitsNumberFromFile(map<string, int> &commitsNumber,
                                char *filename) {
   ifstream srcFile(filename);
-  string line, nickname, delimiter = " ";
+  string nickname, line;
+  std::map<std::string, int>::iterator it;
 
   while (getline(srcFile, line)) {
-    nickname = line.substr(0, line.find(delimiter));
-    auto it = commitsNumber.find(nickname);
-    cout << nickname << endl;
-    if (!checkNickname(nickname)) {
-      cout << "Некорректный никнейм " << nickname << endl;
+    if (!checkDataCorrectness(line, commitsNumber, nickname, it))
       return false;
-    }
-
     if (it != commitsNumber.end()) {
       commitsNumber[nickname]++;
     } else
