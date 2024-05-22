@@ -15,16 +15,15 @@ bool compareContributors(const Contributor &a, const Contributor &b) {
 }
 
 //Проверка даты на попадание в диапазон 4 недели от текущего времени
-bool isWithinFourWeeks(const std::string& commit_date){
+bool isWithinFourWeeks(const std::string& commit_date) {
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-    
-    //Приведение строки commit_date к типу time_point
+
+    // Приведение строки commit_date к типу time_point
     std::tm commit_tm = {};
-    strptime(commit_date.c_str(), "%Y-%m-%dT%H:%M:%S", &commit_tm);
-    std::time_t commit_time = std::mktime(&commit_tm);
-    std::chrono::system_clock::time_point commit_point = std::chrono::system_clock::from_time_t(commit_time);
-    
-    
+    std::istringstream ss(commit_date);
+    ss >> std::get_time(&commit_tm, "%Y-%m-%dT%H:%M:%S");
+    std::chrono::system_clock::time_point commit_point = std::chrono::system_clock::from_time_t(std::mktime(&commit_tm));
+
     /*
     Проверка, была ли дата коммита менее чем 4 недели назад.
     Высчитывая разницу в кол-ве часов и включительно день в день, учитывая, что процедура запускается в 00:00.
@@ -33,7 +32,7 @@ bool isWithinFourWeeks(const std::string& commit_date){
     (для 22.05.2024 это будет 24.04.2024)
     */ 
     std::chrono::system_clock::duration diff = now - commit_point;
-    std::chrono::hours diff_in_hours = std::chrono::duration_cast<std::chrono::hours>(now - commit_point);
+    std::chrono::hours diff_in_hours = std::chrono::duration_cast<std::chrono::hours>(diff);
     return diff_in_hours.count() < 29 * 24;
 }
 
