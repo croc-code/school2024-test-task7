@@ -14,17 +14,25 @@
 namespace Parser {
 	class Commit {
 	private:
-		std::string username{};
+		std::string authorUsername{};
 		std::string commitHash{};
 		std::tm commitTime{};
 	public:
 		Commit(std::string  _username, std::string  _commitHash, const std::string& _commitTime);
 
-		[[nodiscard]] std::string getUsername() const;
+//		Commit();
 
-		[[nodiscard]] std::string getCommitHash() const;
+//		Commit(const Commit& commit);
 
-		[[nodiscard]] std::tm getCommitTime() const;
+//		Commit(Commit&& moved) noexcept;
+
+		[[nodiscard]] bool isRecentEnough(int validDayDiff) const;
+
+		[[nodiscard]] std::string getAuthorUsername() const;
+
+		[[nodiscard]] std::string getHash() const;
+
+		[[nodiscard]] std::tm getTime() const;
 	};
 
 } //Parser

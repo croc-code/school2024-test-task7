@@ -7,16 +7,30 @@
 
 #include <iostream>
 #include <regex>
+#include <fstream>
 #include "Commit.hpp"
 
 namespace Parser {
+
+	using CommitMap = std::map<std::string, std::vector<Commit>>;
+
+	static const int DEFAULT_DURATION_DAYS{28};
+
+	/// Парсинг файла с коммитами\n
+	/// Пример:\n
+	///   CommitParser parser{NameOfTheFileWithCommitRecords};
+	///   std::vector<Parser::Commit> &commits = parser.ParseCommits()
 	class CommitParser {
 	private:
-		std::string commitsFile{};
-		static const auto recordPattern;
+		const int sprintDurationInDays{};
+		std::ifstream commitsFile;
+		static const std::regex recordPattern;
 		static Commit parseCommit(const std::string& fileLine);
 	public:
-		explicit CommitParser(std::string _commitsFile);
+		explicit CommitParser(const std::string& _commitsFile, int _sprintDurationInDays=DEFAULT_DURATION_DAYS);
+		~CommitParser();
+//		std::vector<Commit> ParseCommits();
+		std::map<std::string, std::vector<Commit>> ParseCommits();
 	};
 } //Parser
 

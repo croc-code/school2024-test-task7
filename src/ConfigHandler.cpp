@@ -11,7 +11,7 @@ ConfigHandler::ConfigHandler::ConfigHandler(std::string _configFilePath):
 	{
 		std::ifstream configFile{configFilePath};
 		if (!configFile.is_open()) {
-			throw std::runtime_error("Error opening a file by path: " + configFilePath);
+			throw std::runtime_error("Error opening a config file by path: " + configFilePath);
 		}
 
 		nlohmann::json j{};

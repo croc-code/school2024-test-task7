@@ -14,12 +14,14 @@ set(${PROJECT_NAME}_HEADERS
         src/ConfigHandler.hpp
         src/Commit.hpp
         src/CommitParser.hpp
+        src/TopContributors.hpp
 )
 
 set(${PROJECT_NAME}_SOURCES
         src/ConfigHandler.cpp
         src/Commit.cpp
         src/CommitParser.cpp
+        src/TopContributors.cpp
         src/main.cpp
 )
 

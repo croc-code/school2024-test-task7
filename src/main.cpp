@@ -1,13 +1,18 @@
 #include <iostream>
 #include "ConfigHandler.hpp"
+#include "TopContributors.hpp"
 
 int main() {
-	std::cout << "Hello, World!" << std::endl;
 	try {
-		ConfigHandler::ConfigHandler Cfg{};
-		std::cout << Cfg.getOutputFilePath() << std::endl << Cfg.getCommitsFilePath();
+		ConfigHandler::ConfigHandler Config{};
+//		std::cout << Config.getOutputFilePath() << std::endl << Config.getCommitsFilePath();
+		Parser::CommitParser parser{Config.getCommitsFilePath()};
+		Contributors::TopContributors topContributors{};
+		auto commitRecords = parser.ParseCommits();
+		topContributors.FindTop(commitRecords);
+		topContributors.WriteTopToFile(Config.getOutputFilePath());
 	} catch(const std::exception& e) {
-		std::cerr << "Error occurred: " << e.what() << std::endl;
+		std::cout << "Error occurred: " << e.what() << std::endl;
 	}
 	return 0;
 }
