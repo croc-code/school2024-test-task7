@@ -9,9 +9,16 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // чтение путей файла чтения и файла записи в список
+        List<String> paths = null;
         try {
-            // чтение путей файла чтения и файла записи в список
-            List<String> paths = Files.readAllLines(Paths.get("src/files/paths.txt"));
+            paths = Files.readAllLines(Paths.get("src/files/paths.txt"));
+        } catch (IOException e) {
+            System.out.println("Error reading paths.txt");
+            throw new RuntimeException(e);
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(paths.getLast()))) {
 
             // чтение строк из файла "commits.txt" в список
             List<String> allCommits = Files.readAllLines(Paths.get(paths.getFirst()));
@@ -20,12 +27,9 @@ public class Main {
             // по количеству коммитов
             List<String> topContributors = Top3Contributors.findByCommitsCount(allCommits);
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(paths.getLast()));
             for (String contributor: topContributors) {
                 writer.write(contributor + "\n");
             }
-            // закрытие потока записи
-            writer.close();
 
         } catch (IOException e) {
             if (e.toString().contains("commits.txt"))

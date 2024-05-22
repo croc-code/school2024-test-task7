@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 public class Top3Contributors {
 
-    private static final int kolElem = 3;
+    private static final int elemCount = 3;
     private static final int hashLength = 7;
     private static final String dateFormat = "yyyy-MM-dd";
     private static final String timeFormat = "HH:mm:ss";
@@ -36,7 +36,7 @@ public class Top3Contributors {
         String[] splitCommit = commit.split(" ");
 
         // Проверка, состоит ли строка коммита из 3 элементов
-        if (splitCommit.length != kolElem) {
+        if (splitCommit.length != elemCount) {
             return false;
         }
 
