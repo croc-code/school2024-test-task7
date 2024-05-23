@@ -5,7 +5,7 @@
 #include "CommitParser.hpp"
 
 
-const std::regex Parser::CommitParser::recordPattern{R"(^(\w+_?\w*\d*)\s+(\w{7})\s+(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}))"};
+const std::regex Parser::CommitParser::recordPattern{R"(^([A-Za-z_][A-Za-z0-9_]*) ([a-z0-9]{7}) (\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?))"};
 
 Parser::CommitParser::CommitParser(const std::string &_commitsFile, const int _sprintDurationInDays):
 	sprintDurationInDays(_sprintDurationInDays)
