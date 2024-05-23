@@ -14,10 +14,6 @@ Parser::Commit::Commit(std::string _username, std::string _commitHash, const std
 			}
 		}
 
-//Parser::Commit::Commit(): authorUsername(), commitHash(), commitTime() {
-//
-//}
-
 bool Parser::Commit::isRecentEnough(int validDayDiff) const {
 	if (0 > validDayDiff or validDayDiff > 365) {
 		throw std::string{"Invalid dayDiff argument in isRecentEnough func: must be between 0 and 365"};

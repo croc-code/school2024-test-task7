@@ -33,12 +33,6 @@ namespace Parser {
 	public:
 		Commit(std::string  _username, std::string  _commitHash, const std::string& _commitTime);
 
-//		Commit();
-
-//		Commit(const Commit& commit);
-
-//		Commit(Commit&& moved) noexcept;
-
 		[[nodiscard]] bool isRecentEnough(int validDayDiff) const;
 
 		[[nodiscard]] std::string getAuthorUsername() const;

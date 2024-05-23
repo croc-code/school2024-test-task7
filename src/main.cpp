@@ -5,7 +5,6 @@
 int main() {
 	try {
 		ConfigHandler::ConfigHandler Config{};
-//		std::cout << Config.getOutputFilePath() << std::endl << Config.getCommitsFilePath();
 		Parser::CommitParser parser{Config.getCommitsFilePath()};
 		Contributors::TopContributors topContributors{};
 		auto commitRecords = parser.ParseCommits();
