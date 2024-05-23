@@ -12,6 +12,7 @@
 
 namespace ConfigHandler {
 
+	// Путь по умолчанию, по которому должен лежать файл с конфигами(в формате json)
 	static const std::string DEFAULT_CONFIG_PATH{"../config/config.json"};
 
 	class ConfigHandler {

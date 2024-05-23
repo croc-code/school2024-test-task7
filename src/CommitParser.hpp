@@ -14,23 +14,26 @@ namespace Parser {
 
 	using CommitMap = std::map<std::string, std::vector<Commit>>;
 
+	// Значение по умолчанию для продолжительности спринта(4 недели)
 	static const int DEFAULT_DURATION_DAYS{28};
 
-	/// Парсинг файла с коммитами\n
-	/// Пример:\n
-	///   CommitParser parser{NameOfTheFileWithCommitRecords};
-	///   std::vector<Parser::Commit> &commits = parser.ParseCommits()
+/**
+	Парсинг файла с коммитами
+	Пример:
+	  CommitParser parser{NameOfTheFileWithCommitRecords};
+	  Parser::CommitMap commits = parser.ParseCommits()
+*/
 	class CommitParser {
 	private:
-		const int sprintDurationInDays{};
+		int sprintDurationInDays{DEFAULT_DURATION_DAYS};
 		std::ifstream commitsFile;
 		static const std::regex recordPattern;
 		static Commit parseCommit(const std::string& fileLine);
 	public:
 		explicit CommitParser(const std::string& _commitsFile, int _sprintDurationInDays=DEFAULT_DURATION_DAYS);
 		~CommitParser();
-//		std::vector<Commit> ParseCommits();
-		std::map<std::string, std::vector<Commit>> ParseCommits();
+		void setSprintDuration(int _sprintDurationInDays=DEFAULT_DURATION_DAYS);
+		CommitMap ParseCommits();
 	};
 } //Parser
 

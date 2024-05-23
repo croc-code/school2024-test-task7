@@ -9,9 +9,22 @@
 #include <chrono>
 #include <sstream>
 #include <iomanip>
-//#include <string>
 
 namespace Parser {
+	/**
+		 Функционал:
+		 	Проверка свежести коммита
+		 Пример:
+		 	Commit commit{"Ivan_Petrov", "hash256", "2024-05-05T13:56:39.492"};
+		 	if (!commit.isRecentEnough(14)) {
+		 		std::cout << commit.getHash() << "Commit was made a long time ago";
+		 	} else {
+		 		std::cout << All is OK << std::endl;
+		 	}
+
+		 Код из примера выводит в консоль "All is OK", в случае если коммит сделан не раньше, чем 14 дней назад.
+		 Текущий день при проверке не учитывается
+	 */
 	class Commit {
 	private:
 		std::string authorUsername{};

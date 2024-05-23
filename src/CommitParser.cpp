@@ -16,6 +16,11 @@ Parser::CommitParser::CommitParser(const std::string &_commitsFile, const int _s
 		}
 	}
 
+void Parser::CommitParser::setSprintDuration(int _sprintDurationInDays) {
+	this->sprintDurationInDays = _sprintDurationInDays;
+}
+
+// Парсинг отдельного коммита
 Parser::Commit Parser::CommitParser::parseCommit(const std::string &fileLine) {
 	std::smatch match;
 	if (std::regex_search(fileLine, match, recordPattern)) {
@@ -34,9 +39,10 @@ Parser::CommitMap Parser::CommitParser::ParseCommits() {
 	while (std::getline(commitsFile, commitRecord)) {
 		try {
 			auto commit = parseCommit(commitRecord);
+			// Если коммит не попадает в нужные временные рамки, то пропускаем его
 			if (!commit.isRecentEnough(sprintDurationInDays)) {
 				throw std::string{"Commit "} + std::string{commit.getHash()}
-					  + std::string{"does not fit within the required time frame"};
+					  + std::string{" does not fit within the required time frame"};
 			}
 			contributorsCommits[commit.getAuthorUsername()].push_back(commit);
 		} catch (const std::string& err) {

@@ -14,11 +14,12 @@ void Contributors::TopContributors::setTopCount(unsigned int _topCount) {
 	this->topCount = _topCount;
 }
 
-void Contributors::TopContributors::FindTop(Parser::CommitMap commitMap) {
+void Contributors::TopContributors::FindTop(const Parser::CommitMap& commitMap) {
 	for (const auto& pair : commitMap) {
 		topContributorsList.emplace_back(pair.first, pair.second.size());
 	}
 
+	// сортировка контрибьютеров по количеству коммитов
 	std::sort(topContributorsList.begin(), topContributorsList.end(),
 			  [](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) -> bool {
 				  return a.second > b.second;
@@ -30,12 +31,14 @@ void Contributors::TopContributors::WriteTopToFile(const std::string &_outputFil
 	if(!outputFile.is_open()) {
 		throw std::runtime_error("Error opening output file by path: " + _outputFile);
 	}
-	for(size_t i{}; i < topContributorsList.size(); ++i) {
+
+	size_t i{};
+	for(; i < topCount; ++i) {
 		outputFile << topContributorsList[i].first << std::endl;
-		if (i >= topCount - 1 and i != topContributorsList.size() - 1
-		and topContributorsList[i+i].second < topContributorsList[i].second) {
-			break;
-		}
+	}
+	// Если на какое-то место претендуют сразу несколько контрибьютеров, то выводим их всех
+	while (topContributorsList[i].second == topContributorsList[i-1].second and i < topContributorsList.size()) {
+		outputFile << topContributorsList[i++].first << std::endl;
 	}
 	outputFile.close();
 }

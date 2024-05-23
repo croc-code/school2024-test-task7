@@ -11,16 +11,22 @@
 
 namespace Contributors {
 
+	// Значение по умолчанию для количества лучших контрибьюторов, которых нужно записать в файл
 	static const unsigned DEFAULT_TOP_COUNT{3};
 
+	/**
+		Функционал:
+	 		Сортировка контрибьютеров по количеству коммитов
+	 		Запись DEFAULT_TOP_COUNT лучших контрибьютеров в файл
+	*/
 	class TopContributors {
 	private:
-		unsigned topCount{};
+		unsigned topCount{DEFAULT_TOP_COUNT};
 		std::vector<std::pair<std::string, int>> topContributorsList{};
 	public:
 		explicit TopContributors(unsigned _topCount=DEFAULT_TOP_COUNT);
 
-		void FindTop(Parser::CommitMap commitMap);
+		void FindTop(const Parser::CommitMap& commitMap);
 
 		void WriteTopToFile(const std::string& _outputFile);
 

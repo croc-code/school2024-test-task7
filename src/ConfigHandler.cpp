@@ -4,7 +4,6 @@
 
 #include "ConfigHandler.hpp"
 
-//#include <utility>
 
 ConfigHandler::ConfigHandler::ConfigHandler(std::string _configFilePath):
 	configFilePath(std::move(_configFilePath))
