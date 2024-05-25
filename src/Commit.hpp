@@ -27,11 +27,20 @@ namespace Parser {
 	 */
 	class Commit {
 	private:
+		static int default_c, custom_c, copy_c, move_c;
 		std::string authorUsername{};
 		std::string commitHash{};
 		std::tm commitTime{};
 	public:
 		Commit(std::string  _username, std::string  _commitHash, const std::string& _commitTime);
+
+		Commit();
+
+		Commit(const Commit& commit);
+
+		Commit(Commit&& moved) noexcept ;
+
+		~Commit();
 
 		[[nodiscard]] bool isRecentEnough(int validDayDiff) const;
 

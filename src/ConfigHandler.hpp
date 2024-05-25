@@ -23,6 +23,8 @@ namespace ConfigHandler {
 	public:
 		explicit ConfigHandler(std::string filePath=DEFAULT_CONFIG_PATH);
 
+		~ConfigHandler();
+
 		[[nodiscard]] std::string getCommitsFilePath() const;
 
 		[[nodiscard]] std::string getOutputFilePath() const;

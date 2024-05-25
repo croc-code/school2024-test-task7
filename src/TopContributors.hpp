@@ -26,6 +26,8 @@ namespace Contributors {
 	public:
 		explicit TopContributors(unsigned _topCount=DEFAULT_TOP_COUNT);
 
+		~TopContributors();
+
 		void FindTop(const Parser::CommitMap& commitMap);
 
 		void WriteTopToFile(const std::string& _outputFile);
