@@ -23,7 +23,7 @@ void Contributors::TopContributors::FindTop(const Parser::CommitMap*& commitMap)
 			delete pair.second[i];
 		}
 	}
-	delete commitMap; // ! не влияет
+	delete commitMap;
 	// сортировка контрибьютеров по количеству коммитов
 	std::sort(topContributorsList.begin(), topContributorsList.end(),
 			  [](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) -> bool {

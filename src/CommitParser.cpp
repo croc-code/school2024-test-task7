@@ -23,7 +23,7 @@ void Parser::CommitParser::setSprintDuration(int _sprintDurationInDays) {
 }
 
 // Парсинг отдельного коммита
-Parser::Commit* Parser::CommitParser::parseCommit(const std::string &fileLine) { // ! возвращать указатель на коммит
+Parser::Commit* Parser::CommitParser::parseCommit(const std::string &fileLine) {
 	p_commit++;
 	std::cout << p_commit << " CALL parseCOMMIT FUNC ";
 	std::smatch match;
