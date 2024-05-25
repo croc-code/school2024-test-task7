@@ -8,8 +8,6 @@ Contributors::TopContributors::TopContributors(unsigned int _topCount): topCount
 {
 	if (topCount == 0)
 		topCount = 1;
-
-	std::cout << "TOP_CONTRIBUTORS CONSTRUCTOR" << std::endl;
 }
 
 void Contributors::TopContributors::setTopCount(unsigned int _topCount) {
@@ -46,8 +44,4 @@ void Contributors::TopContributors::WriteTopToFile(const std::string &_outputFil
 		outputFile << topContributorsList[i++].first << std::endl;
 	}
 	outputFile.close();
-}
-
-Contributors::TopContributors::~TopContributors() {
-	std::cout << "TOP_CONTRIBUTORS DESTRUCTOR" << std::endl;
 }

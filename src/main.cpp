@@ -8,7 +8,6 @@ int main() {
 		Parser::CommitParser parser{Config.getCommitsFilePath()};
 		Contributors::TopContributors topContributors{};
 		auto commitRecords = parser.ParseCommits();
-		std::cout << "CALL FindTop FUNC" << std::endl;
 		topContributors.FindTop(commitRecords);
 		topContributors.WriteTopToFile(Config.getOutputFilePath());
 	} catch(const std::exception& e) {

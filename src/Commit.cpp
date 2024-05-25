@@ -6,9 +6,6 @@
 Parser::Commit::Commit(std::string _username, std::string _commitHash, const std::string& _commitTime):
 		authorUsername(std::move(_username)), commitHash(std::move(_commitHash))
 		{
-			custom_c++;
-			std::cout << custom_c << " CUSTOM COMMIT CONSTRUCTOR" << std::endl;
-
 			std::istringstream iss(_commitTime);
 			// парсинг времени в структуру
 			iss >> std::get_time(&commitTime, "%Y-%m-%dT%H:%M:%S");
@@ -61,29 +58,4 @@ std::string Parser::Commit::getHash() const {
 
 std::tm Parser::Commit::getTime() const {
 	return commitTime;
-}
-
-int Parser::Commit::default_c{};
-int Parser::Commit::custom_c{};
-int Parser::Commit::copy_c{};
-int Parser::Commit::move_c{};
-
-Parser::Commit::Commit() {
-	default_c++;
-	std::cout << default_c << " DEFAULT COMMIT CONSTRUCTOR" << std::endl;
-}
-
-Parser::Commit::Commit(const Parser::Commit &commit) {
-	copy_c++;
-	std::cout << copy_c << " COPY COMMIT CONSTRUCTOR" << std::endl;
-}
-
-Parser::Commit::Commit(Parser::Commit &&moved) noexcept {
-	move_c++;
-	std::cout << move_c << " MOVE COMMIT CONSTRUCTOR" << std::endl;
-}
-
-Parser::Commit::~Commit() {
-	custom_c--;
-	std::cout << custom_c << " COMMIT DESTRUCTOR" << std::endl;
 }

@@ -20,8 +20,6 @@ ConfigHandler::ConfigHandler::ConfigHandler(std::string _configFilePath):
 		outputFilePath = j["outputFilePath"].get<std::string>();
 
 		configFile.close();
-
-		std::cout << "CONFIGURE_HANDLER CONSTRUCTOR" << std::endl;
 	}
 
 std::string ConfigHandler::ConfigHandler::getCommitsFilePath() const {
@@ -30,8 +28,4 @@ std::string ConfigHandler::ConfigHandler::getCommitsFilePath() const {
 
 std::string ConfigHandler::ConfigHandler::getOutputFilePath() const {
 	return outputFilePath;
-}
-
-ConfigHandler::ConfigHandler::~ConfigHandler() {
-	std::cout << "CONFIGURE_HANDLER DESTRUCTOR" << std::endl;
 }

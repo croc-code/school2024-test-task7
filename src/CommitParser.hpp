@@ -25,7 +25,6 @@ namespace Parser {
 */
 	class CommitParser {
 	private:
-		static int p_commit;
 		int sprintDurationInDays{DEFAULT_DURATION_DAYS};
 		std::ifstream commitsFile;
 		static const std::regex recordPattern;
