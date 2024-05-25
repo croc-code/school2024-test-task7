@@ -16,11 +16,14 @@ void Contributors::TopContributors::setTopCount(unsigned int _topCount) {
 	this->topCount = _topCount;
 }
 
-void Contributors::TopContributors::FindTop(const Parser::CommitMap& commitMap) {
-	for (const auto& pair : commitMap) {
+void Contributors::TopContributors::FindTop(const Parser::CommitMap*& commitMap) {
+	for (const auto& pair : *commitMap) {
 		topContributorsList.emplace_back(pair.first, pair.second.size());
+		for (size_t i{}; i < pair.second.size(); ++i) {
+			delete pair.second[i];
+		}
 	}
-
+	delete commitMap; // ! не влияет
 	// сортировка контрибьютеров по количеству коммитов
 	std::sort(topContributorsList.begin(), topContributorsList.end(),
 			  [](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) -> bool {

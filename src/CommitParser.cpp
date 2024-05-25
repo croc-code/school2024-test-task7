@@ -38,9 +38,9 @@ Parser::Commit* Parser::CommitParser::parseCommit(const std::string &fileLine) {
 		throw std::string{"Commit record doesn't match the correct format"};
 	}
 }
-Parser::CommitMap Parser::CommitParser::ParseCommits() {
+const Parser::CommitMap* Parser::CommitParser::ParseCommits() {
 	std::string commitRecord;
-	Parser::CommitMap contributorsCommits;
+	auto* contributorsCommits = new Parser::CommitMap;
 	while (std::getline(commitsFile, commitRecord)) {
 		try {
 			std::cout << "assign a returned value to the variable" << std::endl;
@@ -51,7 +51,7 @@ Parser::CommitMap Parser::CommitParser::ParseCommits() {
 					  + std::string{" does not fit within the required time frame"};
 			}
 			std::cout << "add the commit to the map" << std::endl;
-			contributorsCommits[commit->getAuthorUsername()].push_back(commit);
+			contributorsCommits->operator[](commit->getAuthorUsername()).push_back(commit);
 		} catch (const std::string& err) {
 			std::cout << err << std::endl;
 		}

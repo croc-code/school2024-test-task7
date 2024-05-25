@@ -28,7 +28,7 @@ namespace Contributors {
 
 		~TopContributors();
 
-		void FindTop(const Parser::CommitMap& commitMap);
+		void FindTop(const Parser::CommitMap*& commitMap);
 
 		void WriteTopToFile(const std::string& _outputFile);
 

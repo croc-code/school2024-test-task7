@@ -34,7 +34,7 @@ namespace Parser {
 		explicit CommitParser(const std::string& _commitsFile, int _sprintDurationInDays=DEFAULT_DURATION_DAYS);
 		~CommitParser();
 		void setSprintDuration(int _sprintDurationInDays=DEFAULT_DURATION_DAYS);
-		CommitMap ParseCommits();
+		const CommitMap* ParseCommits();
 	};
 } //Parser
 
